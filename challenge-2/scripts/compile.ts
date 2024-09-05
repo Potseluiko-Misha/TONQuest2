@@ -33,3 +33,6 @@ async function compileScript() {
 }
 
 compileScript();
+
+//link to blockchain explorer
+//https://testnet.tonscan.org/address/kQAU4HsHjDCxy23B36Mk8OMQ71shUKhrOf9c9lk-SkUIXlf_
