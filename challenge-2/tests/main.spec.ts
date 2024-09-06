@@ -1,4 +1,4 @@
-import { Cell, Address, toNano } from "ton-core";
+import { Cell, Address, toNano, beginCell } from "ton-core";
 import { hex } from "../build/main.compiled.json";
 import { Blockchain } from "@ton-community/sandbox";
 import { MainContract } from "../wrappers/MainContract";
@@ -28,9 +28,15 @@ describe("msg test", () => {
 			success: true,
 		});
 
-		const arr = sentMessageResult.transactions.map(tx => flattenTransaction(tx));
-		console.log(arr)
+		//const arr = sentMessageResult.transactions.map(tx => flattenTransaction(tx));
 
+		let reply = beginCell().storeUint(0, 32).storeStringTail("reply").endCell();
+
+		expect(sentMessageResult.transactions).toHaveTransaction({
+			body: reply,
+			from: myContract.address,
+			to: senderWallet.address
+		});
 
 	});
 });
