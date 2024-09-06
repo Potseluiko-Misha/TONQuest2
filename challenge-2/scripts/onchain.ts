@@ -63,19 +63,22 @@ async function onchainScript() {
 	console.log("Transaction link:",transactionLink);
 
 
-	qrcode.generate(transactionLink, {small: true }, (qr) => {
-		console.log(qr);
-	});
+		qrcode.generate(transactionLink, {small: true }, (qr) => {
+			console.log(qr);
+		});
 
-	setInterval(async () => {
-		const txes = await getTransactions(address.toString());
-		if(txes[0].in_msg.source === "EQCj2gVRdFS0qOZnUFXdMliONgSANYXfQUDMsjd8fbTW-RuC") {
+		setInterval(async () => {
+			const txes = await getTransactions(address.toString());
+			if(txes[0].in_msg.source === "EQCj2gVRdFS0qOZnUFXdMliONgSANYXfQUDMsjd8fbTW-RuC") {
 
-		}
+            	console.log("Last tx: " + new Date(txes[0].utime * 1000))
+            	console.log("IN from: "+ txes[0].in_msg.source+" with msg: "+ txes[0].in_msg.message)
+            	console.log("OUT from: "+ txes[0].out_msgs[0].source +" with msg: "+ txes[0].out_msgs[0].message)
+			}
 
-	},10000)
+		},10000)
 
 
-}
+	}
 
-onchainScript();
+	onchainScript();
