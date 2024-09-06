@@ -4,9 +4,12 @@ import { Blockchain } from "@ton-community/sandbox";
 import { MainContract } from "../wrappers/MainContract";
 import { send } from "process";
 import "@ton-community/test-utils";
+import { flattenTransaction } from "@ton-community/test-utils";
 
-describe("test tests", () => {
-	it("test of test", async() => {
+
+
+describe("msg test", () => {
+	it("test", async() => {
 		const codeCell = Cell.fromBoc(Buffer.from(hex,"hex"))[0];
 
 		const blockchain = await Blockchain.create();
@@ -24,6 +27,10 @@ describe("test tests", () => {
 			to: myContract.address,
 			success: true,
 		});
+
+		const arr = sentMessageResult.transactions.map(tx => flattenTransaction(tx));
+		console.log(arr)
+
 
 	});
 });
